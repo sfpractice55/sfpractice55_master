@@ -1,0 +1,150 @@
+<!--
+ - Created by Gaurav Gulati on 1/29/2017.
+ -->
+
+<apex:page id="NearestLocation" controller="NearestLocationController">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"/>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.10&sensor=false"/>
+    <script src="/soap/ajax/36.0/connection.js" type="text/javascript"/>
+    <script src="/soap/ajax/36.0/apex.js" type="text/javascript"/>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+
+    <script type="text/javascript">
+        var shippingAddress = [];
+        var shippingAddress2 = [];
+        var currAddress = [];
+
+        function authorize() {
+            sforce.connection.sessionId = '{!GETSESSIONID()}';
+        }
+
+        function getAccountsAddress() {
+            result = sforce.connection.query('SELECT Id, Name, ShippingCity,ShippingCountry,ShippingLatitude,ShippingLongitude,ShippingPostalCode,ShippingState,ShippingStreet FROM Account WHERE ShippingPostalCode != null');
+            records = result.getArray('records');
+            if(records.length >0) {
+                for(var i=0;i<records.length;i++) {
+                    shippingAddress[i] = records[i].ShippingStreet + ',' + records[i].ShippingCity + ',' + records[i].ShippingState + ',' + records[i].ShippingPostalCode + ',' + records[i].ShippingCountry;
+                }
+                return shippingAddress;
+            }
+        }
+
+        function getCurrAddress() {
+            var cStreetName = document.getElementById('NearestLocation:j_id1:j_id2:j_id3:cStreet').value;
+            var cCityName = document.getElementById('NearestLocation:j_id1:j_id2:j_id3:cCity').value;
+            var cStateName = document.getElementById('NearestLocation:j_id1:j_id2:j_id3:cState').value;
+            var cPostalCodeNum = document.getElementById('NearestLocation:j_id1:j_id2:j_id3:cPostalCode').value;
+            var cCountryName = document.getElementById('NearestLocation:j_id1:j_id2:j_id3:cCountry').value;
+            alert('Convert this address to Lat Lng : ' + cStreetName + ',' + cCityName + ',' + cStateName + ',' + cPostalCodeNum + ',' + cCountryName);
+            currAddress[0] = cStreetName[0] + ',' + cCityName[0] + ',' + cStateName[0] + ',' + cPostalCodeNum[0] + ',' + cCountryName[0];
+            return currAddress;
+        }
+
+
+        function getLatLng(passAddress, addressType) {
+            var obj;
+            var iHTML = ''
+            iHTML = '<ul>';
+            geocoder = new google.maps.Geocoder();
+            for(var q=0;q<passAddress.length;q++) {
+                geocoder.geocode( { 'address' : passAddress[q]}, function(results, status) {
+                    if(status == google.maps.GeocoderStatus.OK) {
+                        if(addressType == 'CurrAddress') {
+                            document.getElementById('NearestLocation:j_id1:j_id2:j_id3:cLatLng').innerHTML = (results[0].geometry.location.lat()).toString() + ', ' + (results[0].geometry.location.lng()).toString();
+                        } else {
+                            iHTML = iHTML + '<li>' + results[0].formatted_address  + '<br/>' + (results[0].geometry.location.lat()).toString() + ', ' + (results[0].geometry.location.lng()).toString() +'</li><br/>';
+                            document.getElementById('col1').innerHTML = iHTML;
+                        }
+                    } else {
+                        alert('No');
+                    }
+                });
+            }
+            document.getElementById('col1').innerHTML = document.getElementById('col1').value + '</ul>';
+        }
+
+        
+
+        function createMarker(place) {
+          var placeLoc = place.geometry.location;
+          var marker = new google.maps.Marker({
+            map: map,
+            position: place.geometry.location
+          });
+
+          google.maps.event.addListener(marker, 'click', function() {
+            infowindowPlace.setContent(place.name);
+            infowindowPlace.open(map, this);
+          });
+        }
+
+          function resizeIframe() {
+            var me = window.name;
+            if (me) {
+              var iframes = parent.document.getElementsByName(me);
+              if (iframes && iframes.length == 1) {
+                height = document.body.offsetHeight;
+                iframes[0].style.height = height + "px";
+              }
+            }
+          }
+
+        });
+
+        function distance(lat1, lon1, lat2, lon2, unit) {
+            var radlat1 = Math.PI * lat1/180;
+            var radlat2 = Math.PI * lat2/180;
+            var theta = lon1-lon2;
+            var radtheta = Math.PI * theta/180;
+            var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
+            dist = Math.acos(dist);
+            dist = dist * 180/Math.PI;
+            dist = dist * 60 * 1.1515;
+            if (unit=="K") { dist = dist * 1.609344; }
+            if (unit=="N") { dist = dist * 0.8684; }
+	        return dist;
+        }
+
+
+    </script>
+    <style>
+        #col1{width:49%;display:inline-block;}
+        #map {
+  font-family: Arial;
+  font-size:12px;
+  line-height:normal !important;
+  height:500px;
+  background:transparent;
+}
+    </style>
+
+    <apex:form >
+    <apex:pageBlock title="Nearest Location">
+        <apex:pageBlockSection title="Current Location Address">
+            <apex:outputLabel value="Current Street"></apex:outputLabel>
+            <apex:inputText id="cStreet" value="{!cStreet}"></apex:inputText>
+            <apex:outputLabel value="Current City"></apex:outputLabel>
+            <apex:inputText id="cCity" value="{!cCity}"></apex:inputText>
+            <apex:outputLabel value="Current State"></apex:outputLabel>
+            <apex:inputText id="cState" value="{!cState}"></apex:inputText>
+            <apex:outputLabel value="Current Postal Code"></apex:outputLabel>
+            <apex:inputText id="cPostalCode" value="{!cPostalCode}"></apex:inputText>
+            <apex:outputLabel value="Current Country"></apex:outputLabel>
+            <apex:inputText id="cCountry" value="{!cCountry}"></apex:inputText>
+            <apex:outputLabel id="clblLatLng" value="Current Location Latitude Longitude"></apex:outputLabel>
+            <apex:outputText id="cLatLng"></apex:outputText>
+            <apex:commandButton onclick="getCurrAddress(); getLatLng(currAddress, 'CurrAddress'); return false;" value="Generate Lat Lang"></apex:commandButton>
+        </apex:pageBlockSection>
+        <apex:pageBlockSection title="Search Nearest Location" columns="2" collapsible="true"><br/>
+            <div id="col1" style="width: 80%; border:1px black;">
+                <apex:outputText id="aShippingAddress" ></apex:outputText>
+            </div>
+            <div id="map"></div>
+            <br/>
+            <apex:commandButton onclick="authorize(); getAccountsAddress(); getLatLng(shippingAddress,'AccAddress'); return false;" value="Generate Lat Lang"></apex:commandButton>
+        </apex:pageBlockSection>
+    </apex:pageBlock>
+    </apex:form>
+</apex:page>

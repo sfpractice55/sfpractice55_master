@@ -1,0 +1,19 @@
+<aura:component controller="AgreementCustomViewCltr">
+    <aura:attribute name="phaseListInstance" type="Account"/>
+    <aura:attribute name="rowIndex" type="String"/>
+    <aura:registerEvent name="DeletePhaseEvt" type="c:DeletePhaseEvt"/>
+    <tr class="slds-hint-parent">
+         <td role="gridcell">
+            <div class="slds-truncate">{!v.phaseListInstance.Id}</div>
+        </td>
+        <td role="gridcell">
+            <div class="slds-truncate">{!v.phaseListInstance.Name}</div>
+        </td>
+		<td role="gridcell">
+            <a  onclick="{!c.removePhaseRow}" class="common-edit-delete-btn" data-id="{!v.phaseListInstance.Id}" data-index="{!rowIndex}">
+                
+                <span class="slds-assistive-text">Delete</span>
+            </a>
+        </td> 
+    </tr>
+</aura:component>

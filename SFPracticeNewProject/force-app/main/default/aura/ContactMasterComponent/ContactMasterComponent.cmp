@@ -1,0 +1,33 @@
+<aura:component controller="ContactMasterController"
+    implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" access="global">
+    <aura:attribute name="contactList" type="contact[]"></aura:attribute>
+    <lightning:overlayLibrary aura:id="overlayLib"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"></aura:handler>
+    <aura:handler event="force:refreshView" action="{!c.doInit}"></aura:handler>
+    <lightning:button label="Create Contact" variant="Brand" title="Create Contact" name=""
+                                onclick="{!c.refresh}">
+                            </lightning:button>
+    <div class="slds-p-around_small">
+        <div class="slds-grid slds-wrap">
+            <aura:iteration items="{!v.contactList}" var="con">
+                <div class="slds-col slds-size_1-of-3 slds-p-around_small">
+                    <lightning:card footer="{!con.Email}" title="{!con.LastName}">
+                        <aura:set attribute="actions">
+                            <lightning:button label="View Details" variant="Brand" title="View Details" name="{!con.Id}"
+                                onclick="{!c.gotoContactDetail}">
+                            </lightning:button>                            
+                        </aura:set>
+                        <p class="slds-p-horizontal_small">
+                            Full Name<br/>
+                            {!con.Name}<br />
+                            Email<br/>
+                            {!con.Email}<br/>
+                            Business Phone<br/>
+                            {!con.Phone}<br/>
+                        </p>
+                    </lightning:card>
+                </div>
+            </aura:iteration>
+        </div>
+    </div>
+</aura:component>

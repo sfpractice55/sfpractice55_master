@@ -1,0 +1,10 @@
+<!--
+ - Created by gaura on 11/26/2017.
+ -->
+
+<aura:documentation>
+	<aura:description>Documentation for Registration_Component</aura:description>
+	<aura:example name="Registration_Component" ref="Registration_Component" label="Registration_Component">
+		Example for Registration_Component
+	</aura:example>
+</aura:documentation>

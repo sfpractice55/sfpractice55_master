@@ -1,0 +1,31 @@
+<apex:page standardController="Contact" recordSetVar="contacts">
+    <apex:form > 
+     <apex:pageBlock title="Contact List" id="contact_list">
+    <apex:pageBlockSection title="Contacts">   
+        Filter:
+        <apex:selectList value="{!filterId}" size="1">
+        	<apex:selectOptions value="{!listViewOptions}"></apex:selectOptions>
+            <apex:actionSupport event="onchange" reRender="contact_list"/>
+        </apex:selectList>
+        <apex:pageBlockTable value="{!contacts}" var="con">  
+        <apex:column value="{!con.firstname}"/>
+            <apex:column value="{!con.lastname}"/> 
+            <apex:column value="{!con.email}"/>
+        </apex:pageBlockTable>
+        <apex:commandLink action="{!Previous}" value="Previous" rendered="{!HasPrevious}"/>
+        <apex:outputText style="color: #ccc;" value="Previous" rendered="{!NOT(HasPrevious)}"/>
+        
+        &nbsp;&nbsp;
+        <apex:commandLink action="{!Next}" value="Next" rendered="{!HasNext}"/>
+        <apex:outputText style="color: #ccc;" value="Next" rendered="{!NOT(HasNext)}"/>
+         Records per page:
+        <apex:selectList value="{!PageSize}" size="1">
+        <apex:selectOption itemValue="5" itemLabel="5"></apex:selectOption>
+            <apex:selectOption itemValue="20" itemLabel="20"></apex:selectOption>
+            <apex:actionSupport event="onchange" reRender="contact_list"/>
+        </apex:selectList>
+        
+    </apex:pageBlockSection> 
+    </apex:pageBlock> 
+    </apex:form> 
+</apex:page>

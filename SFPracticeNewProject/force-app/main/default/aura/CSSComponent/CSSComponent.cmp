@@ -1,0 +1,7 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+	<div class="mydivclass">
+    	<p> This is P1 </p>
+        <p> This is P2 </p>
+        <p> This is P3 </p>
+    </div>
+</aura:component>

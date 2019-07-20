@@ -1,0 +1,23 @@
+<!--
+ - Created by GG0C52159 on 1/13/2017.
+ -->
+
+<apex:page id="TempConvertSOAP" controller="TempConvertSOAP">
+    <apex:form >
+        <apex:pageBlock title="Temperature Convertor">
+            <apex:pageBlockSection >
+                <apex:outputLabel title="Enter Temperature in Celcius"></apex:outputLabel>
+                <apex:inputText id="temperatureVal" value="{!temperatureVal}"></apex:inputText>
+                <apex:selectRadio value="{!terperatureType}">
+                    <apex:SelectOptions value="{!item}"></apex:SelectOptions>
+                </apex:selectRadio>
+            </apex:pageBlockSection>
+            <apex:pageBlockButtons >
+                <apex:commandButton action="{!convertTemperature}" value="Convert" ></apex:commandButton>
+            </apex:pageBlockButtons>
+            <apex:pageBlockSection title="Result">
+                <apex:outputText id="cfTemp" value="{!convertedTemperature}"></apex:outputText>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

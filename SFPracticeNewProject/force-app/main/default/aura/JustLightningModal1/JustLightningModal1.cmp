@@ -1,0 +1,37 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes" access="global">
+    
+    <ltng:require styles="/resource/1503606284000/getsfpractice__SLDS103/salesforce-lightning-design-system-ltng.css" />
+    
+    
+    
+    <div class="slds">
+        
+        <div >
+            <!-- modal body starts here -->
+            <div tabindex="-1" aria-labelledby="header43" aria-hidden="false" id="newClientSectionId" role="dialog" class="slds-modal slds-fade-in-open" style="display:none;">
+                <div class="slds-backdrop slds-backdrop--open">
+                    <div class="slds-modal__container">
+                        <div class="slds-modal__header">
+                            <button class="slds-button slds-modal__close slds-button--icon-inverse" title="Close">
+                                <button class="slds-button slds-button--neutral" onclick="{!c.hideModal}">X</button>  
+                                <span class="slds-assistive-text">Close</span>
+                            </button>
+                            <h2 id="header43" class="slds-text-heading--medium">Modal Header</h2>
+                        </div>
+                        <div class="slds-modal__content slds-p-around--medium">
+                            
+                           London is the capital city of England. It is the most populous city in the United Kingdom, with a metropolitan area of over 13 million inhabitants.
+                        </div>
+                        
+                        <div class="slds-modal__footer">
+                            <button class="slds-button slds-button--brand" onclick="{!c.hideModal}">Cancel</button>
+                            <button class="slds-button slds-button--brand">Continue</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="slds-button slds-button--neutral" onclick="{!c.showModal}">Open Modal</button>
+        </div>
+    </div>
+    
+</aura:component>

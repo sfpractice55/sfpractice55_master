@@ -1,0 +1,20 @@
+<aura:component controller="AgreementCustomViewCltr">
+    <ltng:require styles="/resource/SLDSv1/"/>
+         <aura:attribute name="phaseList" type="Account[]"/>
+    <aura:handler name="init" value="{!this}" action="{!c.methodToGetPhase}"/>
+    <!--<aura:handler event="c:DeletePhaseEvt" action="{!c.removeDeletedRow}"/> -->
+    <table class="slds-table slds-table--bordered common-table-details" role="grid">
+        <tr>
+            <th class="slds-is-sortable slds-is-resizable">
+                <span class="slds-truncate" title="Name">Account Id</span>
+            </th>
+            <th class="slds-is-sortable slds-is-resizable">
+               <span class="slds-truncate" title="Account Name">Account Name</span>
+            </th>
+        </tr>
+        <aura:iteration items="{!v.phaseList}" var="item" indexVar="index">
+           <c:SinglePhase phaseListInstance="{!item}" rowIndex="{!index}"/>
+        </aura:iteration>
+    </table>
+    <button class="slds-button slds-button" onclick="{!c.addPhaseRow}">New Phase</button>
+</aura:component>

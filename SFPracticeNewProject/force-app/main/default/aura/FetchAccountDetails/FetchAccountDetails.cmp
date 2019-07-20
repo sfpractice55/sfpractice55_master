@@ -1,0 +1,78 @@
+<aura:component controller="AccountDetails">
+	<ltng:require styles="/resource/SLDS/assets/styles/salesforce-lightning-design-system.css"/>
+    <aura:attribute name="Account" type="Account" description="Account Details" 
+                    default="{'sObjectType':'Account','Id':'','Name':'','ShippingCity':'', 'getsfpractice__SLASerialNumber__c':''}"/>
+    <aura:attribute name="openMode" type="string" default="New" description="Account opens in New/Edit Mode"/>
+    <aura:attribute name="AccountId" type="string" description="Account Id"/>
+   <!-- <aura:attribute name="SLASerialNumber__c" type="string" description="SLA Serial Number"/>
+    -->
+    <aura:attribute name="spinner" type="boolean" default="false"/>
+    <aura:if isTrue="{!v.spinner}">
+        <div aura:id="spinnerId" class="slds-spinner_container" style="position:fixed;">
+           <div class="slds-spinner--brand  slds-spinner slds-spinner--large slds-is-relative" role="alert">
+             <span class="slds-assistive-text">Loading</span>
+             <div class="slds-spinner__dot-a"></div>
+             <div class="slds-spinner__dot-b"></div>
+           </div>
+        </div>
+     </aura:if>
+    
+    <!-- Event to handle redirection from visual force page -->
+    <aura:registerEvent name="myRedirect" type="c:RedirectToUrl" /> 
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <br/><br/>
+    Component!!!!!!!!! {!v.AccountId}
+    <br/><br/>    
+    <div class="slds">
+        <fieldset> 
+            <div class="slds-text-heading--small slds-p-horizontal--small">Account Details</div>
+            <div class="slds-grid">
+                <div class="slds-col--padded slds-size--1-of-2" >
+                    <div class="slds-form--horizontal">
+                        <div class="slds-form-element">
+                            <label class="slds-form-element__label" >Customer Id</label>
+                            <div class="slds-form-element__control slds-m-vertical--xx-small">
+                                <label class="slds-text-body--small" ><a href="{!'/'+ v.AccountId}">{!v.AccountId}&nbsp;</a></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slds-grid">
+                <div class="slds-col--padded slds-size--1-of-2" >
+                    <div class="slds-form--horizontal">
+                        <div class="slds-form-element">
+                            <label class="slds-form-element__label" >Customer Name</label>
+                            <div class="slds-form-element__control slds-m-vertical--xx-small">
+                                <label class="slds-text-body--small" >{!v.Account.Name}&nbsp;</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slds-grid">
+                <div class="slds-col--padded slds-size--1-of-2" >
+                    <div class="slds-form--horizontal">
+                        <div class="slds-form-element">
+                            <label class="slds-form-element__label" >Shipping City</label>
+                            <div class="slds-form-element__control slds-m-vertical--xx-small">
+                                <label class="slds-text-body--small" >{!v.Account.ShippingCity}&nbsp;</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slds-form-element">
+                            <label class="slds-form-element__label slds-m-vertical--x-small" >SLA Serial Number</label>
+                            <div class="slds-form-element__control">                                
+                                <ui:inputText aura:id="TickerSymbol" class="slds-text" 
+                                                  value="{!v.Account.getsfpractice__SLASerialNumber__c}"/>
+                            </div>
+                        </div>
+            </fieldset>     
+    </div>    
+    <div align="center" class="button-block-top slds-p-horizontal--medium slds-m-top--x-small slds-m-bottom--x-small">
+            <button class="slds-button slds-button--neutral" aura:id="btnSaveBottom" onclick="{!c.saveAccount}">Save as Draft</button>
+    </div>    
+</aura:component>

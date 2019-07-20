@@ -1,0 +1,8 @@
+<aura:component>
+    <aura:registerEvent name="ComponentEventSample" type="c:ComponentEventSample"></aura:registerEvent>
+    <br/><br/>
+    <h1>This is child component</h1>
+    <p>
+        <lightning:button label ="Click to fire comp event" onclick="{!c.fireCompEvent}"></lightning:button>
+    </p>
+</aura:component>

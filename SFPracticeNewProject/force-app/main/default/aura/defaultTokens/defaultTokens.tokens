@@ -1,0 +1,6 @@
+<aura:tokens>
+	<aura:token name = "divFont"
+                value = "Arial, sans-serif"></aura:token>
+    <aura:token name = "divFontColor"
+                value = "red"></aura:token>
+</aura:tokens>

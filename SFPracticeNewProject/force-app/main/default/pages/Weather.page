@@ -1,0 +1,12 @@
+<apex:page controller="WeatherController1">
+    <apex:form >
+        <apex:pageBlock title="Weather">
+            <apex:pageBlockSection title="Enter Zip Code" columns="1">
+                <apex:inputText value="{!yourInputFieldVariable}"/>
+            </apex:pageBlockSection>
+            <apex:pageBlockButtons >
+                <apex:commandButton action="{!yourMethod}" value="Pass your data"/>
+            </apex:pageBlockButtons>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

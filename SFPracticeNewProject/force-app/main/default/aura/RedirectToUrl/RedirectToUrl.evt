@@ -1,0 +1,5 @@
+<aura:event type="APPLICATION" description="Event template to handle redirection" >
+    <aura:attribute type="string" name="redirectRecId" />
+    <aura:attribute type="string" name="SObject" />
+    <aura:attribute type="Boolean" name="spCloseOut" />
+</aura:event>

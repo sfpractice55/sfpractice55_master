@@ -1,0 +1,17 @@
+<!--
+ - Created by GG0C52159 on 1/15/2017.
+ -->
+
+<apex:page id="RESTApexCalloutUsingWrapperClass" controller="RESTApexCalloutUsingWrapperClass" title="JSON Table">
+    <apex:form >
+        <apex:pageBlock >
+        <apex:pageBlocktable value="{!performCallout}" var="wrap" width="100%">
+            <apex:column headerValue="Name" value="{!wrap.Name}"/>
+            <apex:column headerValue="AccoutNumber" value="{!wrap.AccNumber}"/>
+            <apex:column headerValue="Source" value="{!wrap.Source}"/>
+            <apex:column headerValue="Website" value="{!wrap.Site}"/>
+            <apex:column headerValue="Email" value="{!wrap.Email}"/>
+        </apex:pageBlocktable>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

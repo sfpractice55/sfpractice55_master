@@ -1,0 +1,17 @@
+<apex:page standardController="Contact" recordSetVar="Con">
+    <apex:pageBlock >    
+   <apex:pageBlockSection >
+   		<apex:pageBlockTable value="{!Con}" var="contact">       		
+            <apex:column headerValue="First Name">
+                <apex:outputText value="{!contact.firstName}"></apex:outputText>                
+            </apex:column>
+			<apex:column headerValue="Last Name">
+                <apex:outputText value="{!contact.lastName}"></apex:outputText>                
+            </apex:column>
+			<apex:column headerValue="Contact Owner's Email">
+                <apex:outputText value="{!contact.Owner.email}"></apex:outputText>                
+            </apex:column>            
+       </apex:pageBlockTable> 
+   </apex:pageBlockSection>	
+        </apex:pageBlock>
+</apex:page>

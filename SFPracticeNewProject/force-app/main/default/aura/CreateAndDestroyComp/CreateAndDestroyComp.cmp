@@ -1,0 +1,8 @@
+<aura:component implements="force:appHostable" >
+	<lightning:button label="Create Button" onclick="{!c.createButtonDynamically}" variant="brand"/>
+	  <lightning:button label="Destroy All buttons" onclick="{!c.removeButtonDynamically}" variant="destructive"/>
+    <br/>
+    <div style="margin:auto; height:600px; width:400px; border:2px ridge red;" aura:id="newtag">
+    	{!v.body}
+    </div>
+</aura:component>

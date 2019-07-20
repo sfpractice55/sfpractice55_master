@@ -1,0 +1,13 @@
+<apex:page standardController="Account" recordSetVar="accounts">
+    
+
+    <apex:pageBlock title="List of Accounts">
+        <apex:pageBlockSection >
+    <apex:repeat var="a" value="{!accounts}">
+             
+            <apex:outputLink target="_blank" value="/{!a.id}">{!a.Name}</apex:outputLink> 
+
+    </apex:repeat>
+    </apex:pageBlockSection>
+    </apex:pageBlock>
+</apex:page>

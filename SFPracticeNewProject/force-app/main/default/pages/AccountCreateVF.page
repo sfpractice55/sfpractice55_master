@@ -1,0 +1,17 @@
+<apex:page controller="AccountCreateController" >
+    <apex:form >
+        <apex:outputText value="{!message}"></apex:outputText>
+    	<apex:pageBlock >
+        	<apex:pageBlockSection >
+            	<apex:inputField value="{!acc.name}"/>
+                <apex:inputField value="{!acc.phone}"/>                
+            </apex:pageBlockSection>
+            <apex:pageBlockSection >
+            	<apex:inputField value="{!acc.billingcity}"/>
+                <apex:inputField value="{!acc.BillingPostalCode}"/>
+                <apex:inputField value="{!acc.BillingCountry}"/>
+            </apex:pageBlockSection>
+            <apex:commandButton value="Save" action="{!save}"/>
+        </apex:pageBlock>
+    </apex:form> 
+</apex:page>

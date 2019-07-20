@@ -1,0 +1,8 @@
+<apex:page standardController="Contact" extensions="RecordContactExt">
+
+<apex:form >
+<apex:outputText value="{!contact.FirstName}" rendered="false"/>
+{!CustomMessage} 
+</apex:form>
+
+</apex:page>

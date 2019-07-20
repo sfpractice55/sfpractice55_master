@@ -1,0 +1,22 @@
+<!--
+ - Created by gaura on 12/25/2017.
+ -->
+
+<apex:page id="ISOtoCodeServiceContinuationObj" docType="html-5.0" controller="ISOtoCodeServiceContinuationObj">
+    <apex:form >
+        <apex:pageBlock title="Continuation Demo">
+            Country ISO:
+            <apex:input label="Country ISO" value="{!countryISO}"></apex:input>
+            <apex:commandButton action="{!requestService}" value="Request Service" reRender="responseBlock"/>
+        </apex:pageBlock>
+
+        <apex:pageBlock title="Response from WebService" id="responseBlock">
+            <pre>{!response}</pre>
+        </apex:pageBlock>
+    </apex:form>
+    <style type="text/css">
+        pre{
+            font-size : 1.7em;
+        }
+    </style>
+</apex:page>

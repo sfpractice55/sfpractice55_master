@@ -1,0 +1,16 @@
+<aura:component implements="force:appHostable"    
+                controller="AccountListController">    
+        
+    <aura:attribute type="object" name="acctList"/>    
+    <aura:attribute name="mycolumns" type="List"/>    
+        
+    <aura:handler name="init" value="{!this}" action="{!c.onInit}"/>    
+        
+    <lightning:datatable aura:id="acctTable"  
+                         data="{! v.acctList }"     
+                         columns="{! v.mycolumns }"     
+                         keyField="Id"    
+                         hideCheckboxColumn="true"  
+                         onsave="{! c.onSave }"/>    
+        
+</aura:component>

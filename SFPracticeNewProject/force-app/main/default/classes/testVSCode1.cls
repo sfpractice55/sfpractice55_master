@@ -1,0 +1,2 @@
+public class testVSCode1 {
+}

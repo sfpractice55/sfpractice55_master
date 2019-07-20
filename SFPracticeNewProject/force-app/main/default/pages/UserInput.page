@@ -1,0 +1,19 @@
+<apex:page standardController="Account" extensions="clsUserInput" action="{!initialize}">
+    <apex:form >
+        <apex:actionStatus id="wait">
+            <apex:facet name="start">
+                <apex:outputPanel >
+                    <c:loading text="Processing..."></c:loading> 
+                </apex:outputPanel>            
+            </apex:facet>
+        </apex:actionStatus>
+        <apex:outputPanel id="optDisconnecRsn">
+            Please select a disconnect reason:<br/>
+            <apex:selectList value="{!discRsn}" size="1">
+                <apex:selectOptions value="{!optDiscReasons}"></apex:selectOptions> 
+            </apex:selectList><br/>
+            <apex:commandButton id="btnSaveDisc" action="{!setDisconnectReason}" value="Submit" onComplete="redirect('{!pageMsg}')" reRender="msg" status="wait"/>
+            <input type="button" name="Cancel" value="Cancel" onClick="window.location.href='/{!Account.Id}'"/>
+        </apex:outputPanel>        
+    </apex:form>
+</apex:page>

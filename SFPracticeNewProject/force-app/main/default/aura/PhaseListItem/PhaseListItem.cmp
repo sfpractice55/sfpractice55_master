@@ -1,0 +1,14 @@
+<aura:component controller="AgreementCustomViewCltr">
+    <aura:attribute name="phaseListInstance" type="Account"/>﻿
+    <aura:attribute name="rowIndex" type="String"/>﻿
+    <!--<aura:registerEvent name="DeletePhaseEvt" type="c:DeletePhaseEvt"/>  -->
+    <tr class="slds-hint-parent">
+        <td role="gridcell">
+            <div class="slds-truncate">{!v.phaseListInstance.Id}</div>
+        </td>
+        <td role="gridcell">
+            <div class="slds-truncate">{!v.phaseListInstance.Name}</div>
+        </td>
+
+    </tr>
+</aura:component>

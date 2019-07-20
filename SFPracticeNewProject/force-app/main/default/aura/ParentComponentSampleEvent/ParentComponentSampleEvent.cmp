@@ -1,0 +1,7 @@
+<aura:component>
+    <aura:attribute name="parentMsg" type="string" default="Default Message from Parent"></aura:attribute>
+    <aura:attribute name="eventNm" type="integer" default="0"></aura:attribute>
+    <aura:handler name="ComponentEventSample" event="c:ComponentEventSample" action="{!c.handleCompEvent}"></aura:handler>
+    <c:ChildComponentEventSample></c:ChildComponentEventSample>
+    {!v.parentMsg}
+</aura:component>

@@ -1,0 +1,49 @@
+<aura:component controller="Datatablecontroller" implements="flexipage:availableForAllPageTypes" access="global">
+    <!-- Static Resource details - jQuery js file  (jQUerySource), jQuery Datatable file  (jqueryDatatableJS) -->
+    <ltng:require styles="{!$Resource.boot}" />
+    <ltng:require styles="{!$Resource.datatablecss}" />
+    <ltng:require styles="{!$Resource.fas}" />
+
+    <ltng:require scripts="{!join(',', $Resource.jqueryjs,$Resource.datatable,$Resource.bt1,$Resource.bt2)}" />
+    <!-- doInit method will call JS controller and then will get the details from Apex Controller and put in into the HTML using aura:iteration -->
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <aura:attribute name="accs" type="Account[]"/>
+    <aura:attribute name="totalRec" type="Integer" default="0" access="Global"/>
+    <!--   <aura:handler name="change" value="{!v.totalRec}" action="{!c.jsLoaded}"/>-->
+    <!--    <aura:attribute name="sum" type="Integer" />  -->
+    <!--  <aura:attribute name="oppCompleted" type="Boolean" default="false"/>
+    <aura:handler name="change" value="{!v.oppCompleted}" action="{!c.jsLoaded}"/>-->
+    <!--  <ui:button label="click" press="{!c.jsLoaded}"/>-->
+
+    <div class="col-md-12">
+        <table class="table table-striped table-bordered" cellspacing="0" width="100%" id="sampleTable">
+            <thead style="    background-color: #337ab7;">
+            <tr>
+                <th>sno</th>
+                <th>ID</th>
+                <th>Name</th>
+            </tr>
+            </thead>
+            <tbody>
+            <aura:iteration items="{!v.accs}" var="ac" indexVar="indx">
+
+                <tr>
+                    <td><a href="#" id="{!ac.Id}" onclick="{!c.record_clicked}">{!indx}</a></td>
+
+                    <td>{!ac.Id}</td>
+                    <td>{!ac.Name}</td>
+                </tr>
+                <aura:if isTrue="{!v.totalRec ==indx+1 }">
+
+                    <!--    <c:iterationCompleteComponent iscompleted="{!v.oppCompleted}"/>  -->
+                </aura:if>
+
+            </aura:iteration>
+
+
+            </tbody>
+        </table>
+
+
+    </div>
+</aura:component>
